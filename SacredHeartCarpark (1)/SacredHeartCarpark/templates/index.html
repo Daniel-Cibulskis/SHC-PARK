@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carpark Home</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #C8102E 50%, #0033A0 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 3rem 4rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            text-align: center;
+            min-width: 350px;
+        }
+        h1 {
+            color: #C8102E;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .tally {
+            font-size: 2rem;
+            color: #0033A0;
+            margin: 1.5rem 0;
+            font-weight: bold;
+        }
+        .user {
+            font-size: 1.2rem;
+            color: #0033A0;
+            margin-bottom: 1.5rem;
+        }
+        a, .btn {
+            display: inline-block;
+            margin: 0.5rem 1rem;
+            padding: 0.7rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .login { background: #0033A0; color: #fff; }
+        .register { background: #C8102E; color: #fff; }
+        .logout { background: #888; color: #fff; }
+        .dashboard { background: #C8102E; color: #fff; }
+        a:hover, .btn:hover { opacity: 0.85; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sacred Heart Carpark</h1>
+        {% if username %}
+            <div class="user">User: <b>{{ username }}</b></div>
+        {% endif %}
+        <div class="tally">Taken Slots: {{ taken }}</div>
+        <div class="tally">Vacant Slots: {{ vacant }}</div>
+        {% if username %}
+            <a href="{{ url_for('dashboard') }}" class="dashboard">Dashboard</a>
+            <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="login">Login</a>
+            <a href="{{ url_for('register') }}" class="register">Register</a>
+        {% endif %}
+    </div>
+</body>
+</html>

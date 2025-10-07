@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - User List</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #C8102E 50%, #0033A0 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem 3rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            text-align: center;
+            min-width: 400px;
+        }
+        h1 {
+            color: #C8102E;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+        th, td {
+            border: 1px solid #0033A0;
+            padding: 0.7rem;
+            font-size: 1.1rem;
+        }
+        th {
+            background: #0033A0;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+        .home {
+            background: #C8102E;
+            color: #fff;
+            border: none;
+            padding: 0.7rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .home:hover { opacity: 0.85; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registered Users & Plates</h1>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Number Plate</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.plate if user.plate else '-' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('home') }}" class="home">Home</a>
+    </div>
+</body>
+</html>

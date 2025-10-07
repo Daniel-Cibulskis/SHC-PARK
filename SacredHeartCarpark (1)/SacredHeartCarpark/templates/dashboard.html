@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #C8102E 50%, #0033A0 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 3rem 4rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            text-align: center;
+            min-width: 350px;
+        }
+        h1 {
+            color: #C8102E;
+            font-size: 2.2rem;
+            margin-bottom: 1.2rem;
+        }
+        .user {
+            font-size: 1.2rem;
+            color: #0033A0;
+            margin-bottom: 1.5rem;
+        }
+        .tally {
+            font-size: 1.5rem;
+            color: #0033A0;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+        form, .actions {
+            margin: 1.5rem 0;
+        }
+        input[type="text"] {
+            padding: 0.5rem;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-right: 1rem;
+        }
+        button, .btn {
+            background: #0033A0;
+            color: #fff;
+            border: none;
+            padding: 0.7rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 0.5rem 0.5rem;
+            font-weight: bold;
+        }
+        .remove {
+            background: #C8102E;
+        }
+        .logout {
+            background: #888;
+        }
+        .home {
+            background: #C8102E;
+        }
+        button:hover, .btn:hover { opacity: 0.85; }
+        .plate {
+            font-size: 1.1rem;
+            margin: 1rem 0;
+        }
+        .flash {
+            color: #C8102E;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div class="user">User: <b>{{ user.username }}</b></div>
+        <div class="tally">Taken Slots: {{ taken }}</div>
+        <div class="tally">Vacant Slots: {{ vacant }}</div>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash">
+              {% for message in messages %}
+                {{ message }}<br>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+        {% if user.plate %}
+            <div class="plate">Your Plate: <b>{{ user.plate }}</b></div>
+            <form method="post">
+                <button type="submit" name="remove" class="remove">Remove Car from Carpark</button>
+            </form>
+        {% else %}
+            <form method="post">
+                <input type="text" name="plate" placeholder="Enter plate" required>
+                <button type="submit">Add Plate</button>
+            </form>
+        {% endif %}
+        <div class="actions">
+            <a href="{{ url_for('home') }}" class="btn home">Home</a>
+            <a href="{{ url_for('logout') }}" class="btn logout">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

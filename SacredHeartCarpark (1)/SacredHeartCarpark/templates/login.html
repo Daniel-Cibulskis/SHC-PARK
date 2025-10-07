@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #C8102E 50%, #0033A0 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 3rem 4rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            text-align: center;
+            min-width: 350px;
+        }
+        h1 {
+            color: #0033A0;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 0.5rem;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-bottom: 1rem;
+            width: 80%;
+        }
+        button {
+            background: #C8102E;
+            color: #fff;
+            border: none;
+            padding: 0.7rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { opacity: 0.85; }
+        .flash {
+            color: #C8102E;
+            margin-bottom: 1rem;
+        }
+        .links {
+            margin-top: 1rem;
+        }
+        a {
+            color: #0033A0;
+            text-decoration: underline;
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        {% set messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">
+            {% for message in messages %}
+              {{ message }}<br>
+            {% endfor %}
+          </div>
+        {% endif %}
+        <form method="post">
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+        <div class="links">
+            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('home') }}">Home</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<audio id="trumpet" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae5e2.mp3"></audio>
+<script>
+  {% if messages %}
+    confetti({
+      particleCount: 200,
+      spread: 90,
+      origin: { y: 0.1 }
+    });
+    document.getElementById('trumpet').play();
+  {% endif %}
+</script>
+</body>
+</html>
